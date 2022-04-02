@@ -6,7 +6,7 @@
 需要算法支持
 默认：不执行 如需要请添加环境变量
 gua_cleancart_Run="true"
-gua_cleancart_PandaToken="" # PanDaToken
+PandaToken="" # PanDaToken
 
 ——————————————
 1.@&@ 前面加数字 指定账号pin
@@ -57,16 +57,13 @@ if ($.isNode()) {
 
 message = ''
 
-jdPandaToken = $.isNode() ? (process.env.gua_cleancart_PandaToken ? process.env.gua_cleancart_PandaToken : `${jdPandaToken}`) : ($.getdata('gua_cleancart_PandaToken') ? $.getdata('gua_cleancart_PandaToken') : `${jdPandaToken}`);
+jdPandaToken = $.isNode() ? (process.env.PandaToken ? process.env.PandaToken : `${jdPandaToken}`) : ($.getdata('PandaToken') ? $.getdata('PandaToken') : `${jdPandaToken}`);
 
 cleancartRun = $.isNode() ? (process.env.gua_cleancart_Run ? process.env.gua_cleancart_Run : `${cleancartRun}`) : ($.getdata('gua_cleancart_Run') ? $.getdata('gua_cleancart_Run') : `${cleancartRun}`);
 
 cleancartProducts = $.isNode() ? (process.env.gua_cleancart_products ? process.env.gua_cleancart_products : `${cleancartProducts}`) : ($.getdata('gua_cleancart_products') ? $.getdata('gua_cleancart_products') : `${cleancartProducts}`);
 
-if (!jdPandaToken) {
-    console.log('请填写Panda获取的Token,变量是gua_cleancart_PandaToken');
-	return;
-}
+
 let productsArr = []
 let cleancartProductsAll = []
 for (let i of cleancartProducts && cleancartProducts.split('|-|')) {
@@ -86,6 +83,10 @@ for (let i in productsArr) {
     $.msg($.name, '【提示】请先获取cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/', {
       "open-url": "https://bean.m.jd.com/"
     });
+    return;
+  }
+  if (!jdPandaToken) {
+      console.log('请填写Panda获取的Token,变量是PandaToken');
     return;
   }
   if(cleancartRun !== 'true'){
