@@ -58,6 +58,8 @@ if ($.isNode()) {
         '7dd1468579244d55a45af7a6a5ef51c1',
         'ad712ab8ddfd4c62908b50cc438e6f9f',
         '12795868bf034968b53039dce7d8a260',
+        '42df88ffaf5a4822956b2d86c23add81',
+        '74fd7cb699c14eacbdf4ad1c3ba4f1d9'
       ];
       // $.authorCode = authorCodeList[random(0, authorCodeList.length)];
       $.authorCode = ownCode ? ownCode : authorCodeList[random(0, authorCodeList.length)]
@@ -123,7 +125,7 @@ async function member() {
           await getToken();
           if (vo.status == 0) {
             await getShopOpenCardInfo({ venderId: `${vo.venderId}`, channel: "401" }, vo.venderId);
-            console.log($.openCardActivityId)
+            // console.log($.openCardActivityId)
             await bindWithVender({ venderId: `${vo.venderId}`, bindByVerifyCodeFlag: 1, registerExtend: {}, writeChildFlag: 0, activityId: 2329491, channel: 401 }, vo.venderId);
             await $.wait(500);
           } else {
