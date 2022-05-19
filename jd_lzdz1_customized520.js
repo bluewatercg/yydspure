@@ -114,30 +114,26 @@ async function member() {
       await task("taskact/common/drawContent", `activityId=${$.activityId}&pin=${encodeURIComponent($.secretPin)}`);
       await task("linkgame/task/opencard/info", `pin=${encodeURIComponent($.secretPin)}&activityId=${$.activityId}`);
       $.log("加入店铺会员");
-      // if ($.openCardList) {
-      //   for (const vo of $.openCardList) {
-      //     // console.log(vo)
-      //     $.log(`>>> 去加入${vo.name} ${vo.venderId}`);
-      //     await task("crm/pageVisit/insertCrmPageVisit", `venderId=1000000576&elementId=入会跳转&pageId=dzlhkk068d4d0ab8a6609723002f50&pin=${encodeURIComponent($.secretPin)}`, 1);
-      //     await $.wait(500);
-      //     await getFirstLZCK();
-      //     await getToken();
-      //     if (vo.status == 0) {
-      //       await getShopOpenCardInfo({ venderId: `${vo.venderId}`, channel: "401" }, vo.venderId);
-      //       console.log($.openCardActivityId)
-      //       await bindWithVender({ venderId: `${vo.venderId}`, bindByVerifyCodeFlag: 1, registerExtend: {}, writeChildFlag: 0, activityId: 2317870, channel: 401 }, vo.venderId);
-      //       await $.wait(500);
-      //     } else {
-      //       $.log(`>>> 已经是会员`);
-      //     }
-      //   }
-      // } else {
-      //   $.log("没有获取到对应的任务。\n");
-      // }
+      if ($.openCardList) {
+        for (const vo of $.openCardList) {
+          // console.log(vo)
+          $.log(`>>> 去加入${vo.name} ${vo.venderId}`);
+          if (vo.status == 0) {
+            await getShopOpenCardInfo({ venderId: `${vo.venderId}`, channel: "401" }, vo.venderId);
+            console.log($.openCardActivityId)
+            await bindWithVender({ venderId: `${vo.venderId}`, bindByVerifyCodeFlag: 1, registerExtend: {}, writeChildFlag: 0, activityId: 2317870, channel: 401 }, vo.venderId);
+            await $.wait(500);
+          } else {
+            $.log(`>>> 已经是会员`);
+          }
+        }
+      } else {
+        $.log("没有获取到对应的任务。\n");
+      }
 
-      $.taskList = []
-      await dsb($.openCardList)
-      await Promise.all($.taskList)
+      // $.taskList = []
+      // await dsb($.openCardList)
+      // await Promise.all($.taskList)
       await task("linkgame/checkOpenCard", `pin=${encodeURIComponent($.secretPin)}&activityId=${$.activityId}`);
       console.log("去助力 -> " + $.authorCode);
       await task("linkgame/assist/status", `activityId=${$.activityId}&pin=${encodeURIComponent($.secretPin)}&shareUuid=${$.authorCode}`);
