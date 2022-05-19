@@ -1,5 +1,6 @@
 /*
 甜蜜派对 五月宠爱季
+7 7 7 7 7 jd_lzdz1_customized520.js
 */
 const $ = new Env("甜蜜派对 五月宠爱季");
 const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
