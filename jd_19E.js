@@ -77,7 +77,7 @@ $.shareCodesArr = [];
 
                 do {
                     var conti = false
-                    await promote_collectAtuoScore()
+                    await promote_collectAutoScore()
                     res = await promote_getTaskDetail()
 
                     for (var p = 0; p < res.lotteryTaskVos[0].badgeAwardVos.length; p++) {
@@ -296,10 +296,10 @@ function promote_raise() {
     })
 }
 
-function promote_collectAtuoScore() {
+function promote_collectAutoScore() {
     let body = { "ss": { "extraData": { "log": "", "sceneid": "RAhomePageh5" }, "secretp": secretp, "random": randomString(6) } };
     return new Promise((resolve) => {
-        $.post(taskPostUrl("promote_collectAtuoScore", body), async(err, resp, data) => {
+        $.post(taskPostUrl("promote_collectAutoScore", body), async(err, resp, data) => {
             try {
                 if (err) {
                     console.log(`${JSON.stringify(err)}`)
